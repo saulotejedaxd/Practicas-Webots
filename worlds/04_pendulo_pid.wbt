@@ -1,0 +1,83 @@
+#VRML_SIM R2025a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/appearances/protos/OsbWood.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/appearances/protos/Copper.proto"
+
+WorldInfo {
+  basicTimeStep 4
+}
+Viewpoint {
+  orientation 0.044757681684355406 0.010034037081508533 -0.9989474801159912 2.700900138411549
+  position 0.34650998611413375 0.40804859736728294 0.8098386984170591
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  floorSize 8 6
+  floorTileSize 0.34 0.34
+}
+Solid {
+  translation 0 0 0.37
+  children [
+    Shape {
+      appearance OsbWood {
+      }
+      geometry DEF GEOMETRIA_MESA Box {
+        size 0.7 0.5 0.76
+      }
+    }
+  ]
+  boundingObject USE GEOMETRIA_MESA
+}
+Robot {
+  translation 0 0.24 0.76
+  children [
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 1 0 0
+      }
+      device [
+        RotationalMotor {
+          name "motor_pendulo"
+        }
+        PositionSensor {
+          name "encoder_pendulo"
+        }
+      ]
+      endPoint Solid {
+        translation 0 0.018 0
+        rotation 1 0 0 0
+        children [
+          Shape {
+            geometry DEF BARRA_PENDULO Cylinder {
+              height 0.14
+              radius 0.0025
+            }
+          }
+        ]
+        boundingObject USE BARRA_PENDULO
+        physics Physics {
+        }
+      }
+    }
+    Shape {
+      appearance Copper {
+      }
+      geometry Box {
+        size 0.01 0.0305 0.0211
+      }
+    }
+  ]
+  controller "pendulo_pid_manual"
+  boundingObject Box {
+    size 0.01 0.0305 0.0211
+  }
+  physics Physics {
+  }
+  locked TRUE
+}
