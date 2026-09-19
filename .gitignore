@@ -1,0 +1,13 @@
+# Webots build products
+controllers/*/build/
+controllers/*/*.exe
+controllers/*/*.o
+controllers/*/*.d
+
+# Webots generated previews/project state
+worlds/.*.jpg
+worlds/.*.wbproj
+
+# OS/editor files
+.DS_Store
+Thumbs.db
